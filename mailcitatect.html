@@ -125,14 +125,18 @@ Traducerea poate fi transmisă prin WhatsApp sau e-mail la adresa echipa@tptrans
 Îți mulțumim pentru disponibilitatea și implicarea ta în echipa TP Translator.
     `;
 
-    // Copiar correo
-    function copiarCorreo() {
-      const textarea = document.getElementById("correoCopiar");
-      textarea.select();
-      textarea.setSelectionRange(0, 99999); // para móviles
-      document.execCommand("copy");
-      alert("Mailul a fost copiat!");
-    }
+function copiarCorreo() {
+  const range = document.createRange();
+  const div = document.getElementById("correoVista");
+  range.selectNodeContents(div);
+  const selection = window.getSelection();
+  selection.removeAllRanges();
+  selection.addRange(range);
+  document.execCommand("copy");
+  selection.removeAllRanges();
+  alert("Mail copiat");
+}
+
 
     // Copiar emails separados por comas
     function copiarEmails() {
