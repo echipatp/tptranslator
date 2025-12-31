@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Șablon de Mail</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
-
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
+      padding: 20px;
       background-color: #ebe5c1;
       color: #7f7537;
-      padding: 20px;
       display: flex;
       justify-content: center;
     }
@@ -31,6 +29,7 @@
       padding: 15px;
       margin-bottom: 20px;
       line-height: 1.6;
+      background-color: #ebe5c1;
     }
 
     button {
@@ -53,19 +52,19 @@
       background-color: #f7f3db;
     }
 
-    /* Estilo para el correo copiado (simple) */
+    /* Estilo para copiar */
     .copiado-numar {
       font-weight: bold;
       color: #7f7537;
     }
     .copiado-citat {
-      font-style: italic;
       font-weight: bold;
+      font-style: italic;
       font-size: 1.1em;
+      color: black;
     }
   </style>
 </head>
-
 <body>
   <div class="container">
     <h1>Șablon de Mail - Citate CT</h1>
@@ -79,72 +78,51 @@
 
     <h2>Instrucțiuni</h2>
     <div class="instr">
-      În BCC sau CCO (nu CC), introdu toate adresele de e-mail ale traducătorilor.<br>
+      În BCC sau CCO (nu CC), introdu toate adresele de mail ale traducătorilor.<br>
       În TO sau PARA, introdu întotdeauna <strong>echipa@tptranslator.tarapromisa.org</strong>.<br>
-      În subiect, scrie <strong>CITAT</strong> urmat de numărul citatului.
+      În subiect, scrie <strong>CITAT</strong> urmat de numărul citatului (de exemplu, CITAT CT34).
     </div>
-
-    <!-- Textarea oculto para copiar -->
-    <textarea id="correoCopiar" style="position:absolute; left:-9999px;"></textarea>
   </div>
 
   <script>
-    // Parámetros de URL
     const params = new URLSearchParams(window.location.search);
     const numarCitat = params.get("numarCitat") || "";
     const citatRO = params.get("citatRO") || "";
     const autorRO = params.get("autorRO") || "";
     const emails = params.get("emails") || "";
 
-    // Vista previa bonita (no se cambia nada)
+    // Vista previa bonita (igual que antes)
     document.getElementById("correoVista").innerHTML = `
       Bună,<br><br>
       În urma verificării evidențelor noastre, te informăm că ți-a fost atribuită traducerea citatului
-      <strong>${numarCitat}</strong>, cu următorul conținut:<br><br>
-      <em>${citatRO}</em><br>
-      <em>${autorRO}</em><br><br>
+      <span class="copiado-numar">${numarCitat}</span>, cu următorul conținut:<br><br>
+      <span class="copiado-citat">${citatRO}</span><br>
+      <span class="copiado-citat">${autorRO}</span><br><br>
       Te rugăm să realizezi traducerea în funcție de disponibilitatea ta, având în vedere faptul că termenul limită pentru finalizare este de 3 luni.<br><br>
-      Traducerea poate fi transmisă prin WhatsApp sau e-mail la adresa
-      <strong>echipa@tptranslator.tarapromisa.org</strong>.<br><br>
+      Traducerea poate fi transmisă prin WhatsApp sau e-mail la adresa echipa@tptranslator.tarapromisa.org.<br><br>
       Îți mulțumim pentru disponibilitatea și implicarea ta în echipa TP Translator.
     `;
 
-    // Preparar textarea para copiar (solo estilo mínimo)
-    document.getElementById("correoCopiar").value = `
-Bună,
-
-În urma verificării evidențelor noastre, te informăm că ți-a fost atribuită traducerea citatului <span class="copiado-numar">${numarCitat}</span>, cu următorul conținut:
-
-<span class="copiado-citat">${citatRO}</span>
-<span class="copiado-citat">${autorRO}</span>
-
-Te rugăm să realizezi traducerea în funcție de disponibilitatea ta, având în vedere faptul că termenul limită pentru finalizare este de 3 luni.
-
-Traducerea poate fi transmisă prin WhatsApp sau e-mail la adresa echipa@tptranslator.tarapromisa.org.
-
-Îți mulțumim pentru disponibilitatea și implicarea ta în echipa TP Translator.
-    `;
-
-function copiarCorreo() {
-  const range = document.createRange();
-  const div = document.getElementById("correoVista");
-  range.selectNodeContents(div);
-  const selection = window.getSelection();
-  selection.removeAllRanges();
-  selection.addRange(range);
-  document.execCommand("copy");
-  selection.removeAllRanges();
-  alert("Mail copiat");
-}
-
+    // Copiar desde el div con HTML mínimo
+    function copiarCorreo() {
+      const range = document.createRange();
+      const div = document.getElementById("correoVista");
+      range.selectNodeContents(div);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      document.execCommand("copy");
+      selection.removeAllRanges();
+      alert("Mail copiado con formato mínimo!");
+    }
 
     // Copiar emails separados por comas
     function copiarEmails() {
       if (emails) {
         navigator.clipboard.writeText(emails);
-        alert("Adresele de email au fost copiate!");
+        alert("Emails copiados!");
       } else {
-        alert("Nu există emailuri de copiat");
+        alert("No hay emails para copiar");
       }
     }
   </script>
