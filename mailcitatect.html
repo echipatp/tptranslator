@@ -99,15 +99,13 @@
       Îți mulțumim pentru disponibilitatea și implicarea ta în echipa TP Translator.
     `;
 
-    function copiarCorreo() {
-      const range = document.createRange();
-      range.selectNode(document.getElementById("correo"));
-      window.getSelection().removeAllRanges();
-      window.getSelection().addRange(range);
-      document.execCommand("copy");
-      window.getSelection().removeAllRanges();
-      alert("Șablonul a fost copiat");
-    }
+function copiarCorreo() {
+  const textoPlano = document.getElementById("correo").innerText;
+  navigator.clipboard.writeText(textoPlano).then(() => {
+    alert("Șablonul a fost copiat");
+  });
+}
+
   </script>
 </body>
 </html>
