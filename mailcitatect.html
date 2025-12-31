@@ -123,16 +123,16 @@ Traducerea poate fi transmisă prin WhatsApp sau e-mail la adresa echipa@tptrans
       selection.addRange(range);
       document.execCommand("copy");
       selection.removeAllRanges();
-      alert("Mail copiado con formato limpio!");
+      alert("Șablonul a fost copiat.");
     }
 
     // Copiar emails separados por comas
     function copiarEmails() {
       if (emails) {
         navigator.clipboard.writeText(emails);
-        alert("Emails copiados!");
+        alert("Adresele de mail au fost copiate.");
       } else {
-        alert("No hay emails para copiar");
+        alert("Nu sunt adrese de mail de copiat.");
       }
     }
   </script>
