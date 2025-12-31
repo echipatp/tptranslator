@@ -33,19 +33,16 @@
       line-height: 1.6;
     }
 
-    strong {
-      color: #7f7537;
-    }
-
     button {
       background-color: #7f7537;
       color: #ebe5c1;
       border: none;
-      padding: 12px 20px;
+      padding: 10px 18px;
       font-weight: 900;
       border-radius: 8px;
       cursor: pointer;
-      margin-bottom: 30px;
+      margin-right: 10px;
+      margin-bottom: 20px;
     }
 
     .instr {
@@ -62,25 +59,34 @@
   <div class="container">
     <h1>Șablon de Mail - Citate CT</h1>
 
-    <div id="correo" class="correo"></div>
+    <!-- Vista previa -->
+    <div id="correoVista" class="correo"></div>
 
+    <!-- Botones -->
     <button onclick="copiarCorreo()">Copiază șablonul</button>
+    <button onclick="copiarEmails()">Copiază adresele</button>
 
     <h2>Instrucțiuni</h2>
     <div class="instr">
-      În BCC sau CCO, introdu toate adresele de e-mail ale traducătorilor care trebuie să realizeze traducerea.<br>
+      În BCC sau CCO, introdu toate adresele de e-mail ale traducătorilor.<br>
       În TO sau PARA, introdu întotdeauna <strong>echipa@tptranslator.tarapromisa.org</strong>.<br>
-      În subiect, scrie <strong>CITAT</strong> urmat de numărul citatului, de exemplu: <strong>CITAT CT340</strong>.
+      În subiect, scrie <strong>CITAT</strong> urmat de numărul citatului.
     </div>
+
+    <!-- Contenido oculto para copiar (HTML limpio) -->
+    <div id="correoCopiar" style="display:none;"></div>
   </div>
 
   <script>
+    // Parámetros URL
     const params = new URLSearchParams(window.location.search);
     const numarCitat = params.get("numarCitat") || "";
     const citatRO = params.get("citatRO") || "";
     const autorRO = params.get("autorRO") || "";
+    const emails = params.get("emails") || "";
 
-    document.getElementById("correo").innerHTML = `
+    // Vista previa (puede tener estilo)
+    document.getElementById("correoVista").innerHTML = `
       Bună,<br><br>
 
       În urma verificării evidențelor noastre, te informăm că ți-a fost atribuită traducerea citatului
@@ -91,19 +97,46 @@
 
       Te rugăm să realizezi traducerea în funcție de disponibilitatea ta, având în vedere faptul că termenul limită pentru finalizare este de 3 luni.<br><br>
 
-      Traducerea poate fi transmisă atât prin intermediul grupului de WhatsApp, cât și prin e-mail, la adresa
+      Traducerea poate fi transmisă prin WhatsApp sau e-mail la adresa
       <strong>echipa@tptranslator.tarapromisa</strong>.<br><br>
-
-      Te rugăm să ai în vedere importanța numerotării corecte a citatelor.<br><br>
 
       Îți mulțumim pentru disponibilitatea și implicarea ta în echipa TP Translator.
     `;
 
+    // Contenido limpio para copiar (blanco y negro)
+    document.getElementById("correoCopiar").innerHTML = `
+      Bună,<br><br>
+
+      În urma verificării evidențelor noastre, te informăm că ți-a fost atribuită traducerea citatului
+      <strong>${numarCitat}</strong>, cu următorul conținut:<br><br>
+
+      <em>${citatRO}</em><br>
+      <em>${autorRO}</em><br><br>
+
+      Te rugăm să realizezi traducerea în funcție de disponibilitatea ta, având în vedere faptul că termenul limită pentru finalizare este de 3 luni.<br><br>
+
+      Traducerea poate fi transmisă prin WhatsApp sau e-mail la adresa
+      echipa@tptranslator.tarapromisa.<br><br>
+
+      Îți mulțumim pentru disponibilitatea și implicarea ta în echipa TP Translator.
+    `;
+
+    // Copiar correo (HTML limpio)
+    function copiarCorreo() {
+      const range = document.createRange();
+      range.selectNode(document.getElementById("correoCopiar"));
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      window.getSelection().removeAllRanges();
+      alert("Mailul a fost copiat");
+    }
+
+    // Copiar correos separados por comas
 function copiarCorreo() {
-  const textoPlano = document.getElementById("correo").innerText;
-  navigator.clipboard.writeText(textoPlano).then(() => {
-    alert("Șablonul a fost copiat");
-  });
+  const textoPlano = document.getElementById("correoCopiar").innerText;
+  navigator.clipboard.writeText(textoPlano);
+  alert("Mailul a fost copiat");
 }
 
   </script>
