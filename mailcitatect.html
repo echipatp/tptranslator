@@ -49,13 +49,14 @@
       background-color: #f7f3db;
     }
 
-    /* Solo para copiar: negrita y cursiva */
+    /* Estilos solo para copiar */
     .copiado-numar {
       font-weight: bold;
     }
     .copiado-citat {
       font-weight: bold;
       font-style: italic;
+      font-size: 1.1em;
     }
   </style>
 </head>
@@ -72,8 +73,8 @@
 
     <h2>Instrucțiuni</h2>
     <div class="instr">
-      În BCC sau CCO (nu CC), introdu toate adresele de mail ale traducătorilor.<br>
-      În TO sau PARA, introdu întotdeauna <strong>echipa@tptranslator.tarapromisa.org</strong>.<br>
+      În BCC sau CCO (nici CC, nici TO sau PARA), introdu toate adresele de mail ale traducătorilor, ca adresele de mail să fie private.<br>
+      În TO sau PARA, introdu întotdeauna <strong>echipa@tptranslator.tarapromisa.org</strong>, ca să primim o copie de mail.<br>
       În subiect, scrie <strong>CITAT</strong> urmat de numărul citatului.
     </div>
 
@@ -101,23 +102,18 @@
       Îți mulțumim pentru disponibilitatea și implicarea ta în echipa TP Translator.
     `;
 
-    // Preparar div oculto con estilo mínimo para copiar
+    // Preparar div oculto para copiar con saltos de línea
     document.getElementById("correoCopiar").innerHTML = `
-Bună,
-
-În urma verificării evidențelor noastre, te informăm că ți-a fost atribuită traducerea citatului <span class="copiado-numar">${numarCitat}</span>, cu următorul conținut:
-
-<span class="copiado-citat">${citatRO}</span>
-<span class="copiado-citat">${autorRO}</span>
-
-Te rugăm să realizezi traducerea în funcție de disponibilitatea ta, având în vedere faptul că termenul limită pentru finalizare este de 3 luni.
-
-Traducerea poate fi transmisă prin WhatsApp sau e-mail la adresa echipa@tptranslator.tarapromisa.org.
-
+Bună,<br><br>
+În urma verificării evidențelor noastre, te informăm că ți-a fost atribuită traducerea citatului <span class="copiado-numar">${numarCitat}</span>, cu următorul conținut:<br><br>
+<span class="copiado-citat">${citatRO}</span><br>
+<span class="copiado-citat">${autorRO}</span><br><br>
+Te rugăm să realizezi traducerea în funcție de disponibilitatea ta, având în vedere faptul că termenul limită pentru finalizare este de 3 luni.<br><br>
+Traducerea poate fi transmisă prin WhatsApp sau e-mail la adresa echipa@tptranslator.tarapromisa.org.<br><br>
 Îți mulțumim pentru disponibilitatea și implicarea ta în echipa TP Translator.
     `;
 
-    // Función para copiar el correo con formato mínimo
+    // Copiar correo con formato mínimo
     function copiarCorreo() {
       const range = document.createRange();
       const div = document.getElementById("correoCopiar");
@@ -130,7 +126,7 @@ Traducerea poate fi transmisă prin WhatsApp sau e-mail la adresa echipa@tptrans
       alert("Mail copiado con formato limpio!");
     }
 
-    // Función para copiar emails separados por comas
+    // Copiar emails separados por comas
     function copiarEmails() {
       if (emails) {
         navigator.clipboard.writeText(emails);
