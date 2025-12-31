@@ -18,7 +18,7 @@
       padding: 20px;
     }
 
-    h1 {
+    h1, h2 {
       font-weight: 900;
       color: #7f7537;
       margin-bottom: 20px;
@@ -50,6 +50,7 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s;
+      margin-bottom: 30px;
     }
 
     button:hover {
@@ -62,18 +63,49 @@
       align-items: center;
       width: 100%;
     }
+
+    .instr {
+      width: 90%;
+      max-width: 700px;
+      background-color: #f7f3db;
+      border: 2px solid #7f7537;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+      font-weight: 900;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Șablon de Mail - Citate CT</h1>
-    <textarea id="correo" readonly>
+    <textarea id="correo" readonly></textarea>
+    <button onclick="copiarCorreo()">Copiază șablonul</button>
+
+    <h2>Instrucțiuni</h2>
+    <div class="instr">
+      - În BCC sau CCO, introdu toate adresele de e-mail ale traducătorilor care trebuie să realizeze traducerea.<br>
+      - În TO sau PARA, introdu întotdeauna <strong>echipa@tptranslator.tarapromisa.org</strong>; prin această adresă vom primi o copie a citatului.<br>
+      - În subiect, scrie <strong>CITAT</strong> urmat de numărul corect al citatului, de exemplu: <strong>CITAT CT340</strong>.
+    </div>
+  </div>
+
+  <script>
+    // Leer parámetros de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const numarCitat = urlParams.get('numarCitat') || '';
+    const citatRO = urlParams.get('citatRO') || '';
+    const autorRO = urlParams.get('autorRO') || '';
+
+    // Construir el contenido dinámico
+    document.getElementById("correo").value = `
 Bună,
 
-În urma verificării evidențelor noastre, te informăm că ți-a fost atribuită traducerea citatului **{{NumărCitat}}**, cu următorul conținut:
+În urma verificării evidențelor noastre, te informăm că ți-a fost atribuită traducerea citatului **${numarCitat}**, cu următorul conținut:
 
-_{{CitatRO}}_
-_{{AutorRO}}_
+_${citatRO}_
+_${autorRO}_
 
 Te rugăm să realizezi traducerea în funcție de disponibilitatea ta, având în vedere faptul că termenul limită pentru finalizare este de 3 luni.
 
@@ -82,17 +114,15 @@ Traducerea poate fi transmisă atât prin intermediul grupului de WhatsApp, cât
 Te rugăm să ai în vedere importanța numerotării corecte a citatelor.
 
 Îți mulțumim pentru disponibilitatea și implicarea ta în echipa TP Translator.
-    </textarea>
-    <button onclick="copiarCorreo()">Copiar plantilla</button>
-  </div>
+`;
 
-  <script>
+    // Función para copiar al portapapeles
     function copiarCorreo() {
       var copyText = document.getElementById("correo");
       copyText.select();
       copyText.setSelectionRange(0, 99999); // Para móviles
       document.execCommand("copy");
-      alert("Plantilla copiada al portapapeles");
+      alert("Șablonul a fost copiat");
     }
   </script>
 </body>
