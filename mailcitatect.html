@@ -2,9 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Șablon de Mail - Citate CT</title>
+  <title>Șablon de Mail</title>
 
-  <!-- Montserrat Black -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
 
   <style>
@@ -12,59 +11,49 @@
       font-family: 'Montserrat', sans-serif;
       background-color: #ebe5c1;
       color: #7f7537;
+      padding: 20px;
       display: flex;
       justify-content: center;
-      padding: 20px;
     }
 
     .container {
+      max-width: 700px;
       width: 100%;
-      max-width: 800px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
 
     h1, h2 {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     .correo {
-      width: 100%;
-      min-height: 420px;
-      padding: 15px;
-      background-color: #ebe5c1;
       border: 2px solid #7f7537;
       border-radius: 10px;
-      font-size: 16px;
-      line-height: 1.6;
-      white-space: pre-line;
+      padding: 15px;
       margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    strong {
+      color: #7f7537;
     }
 
     button {
       background-color: #7f7537;
       color: #ebe5c1;
       border: none;
-      padding: 15px 25px;
-      font-size: 16px;
+      padding: 12px 20px;
       font-weight: 900;
       border-radius: 8px;
       cursor: pointer;
       margin-bottom: 30px;
     }
 
-    button:hover {
-      background-color: #6b652f;
-    }
-
     .instr {
-      width: 100%;
-      background-color: #f7f3db;
       border: 2px solid #7f7537;
       border-radius: 10px;
       padding: 15px;
       line-height: 1.5;
+      background-color: #f7f3db;
     }
   </style>
 </head>
@@ -73,26 +62,24 @@
   <div class="container">
     <h1>Șablon de Mail - Citate CT</h1>
 
-    <div id="correo" class="correo" contenteditable="false"></div>
+    <div id="correo" class="correo"></div>
 
     <button onclick="copiarCorreo()">Copiază șablonul</button>
 
     <h2>Instrucțiuni</h2>
     <div class="instr">
-      • În BCC sau CCO, introdu toate adresele de e-mail ale traducătorilor care trebuie să realizeze traducerea.<br>
-      • În TO sau PARA, introdu întotdeauna <strong>echipa@tptranslator.tarapromisa.org</strong>; prin această adresă vom primi o copie a citatului.<br>
-      • În subiect, scrie <strong>CITAT</strong> urmat de numărul corect al citatului, de exemplu: <strong>CITAT CT340</strong>.
+      În BCC sau CCO, introdu toate adresele de e-mail ale traducătorilor care trebuie să realizeze traducerea.<br>
+      În TO sau PARA, introdu întotdeauna <strong>echipa@tptranslator.tarapromisa.org</strong>.<br>
+      În subiect, scrie <strong>CITAT</strong> urmat de numărul citatului, de exemplu: <strong>CITAT CT340</strong>.
     </div>
   </div>
 
   <script>
-    // Leer parámetros de la URL
     const params = new URLSearchParams(window.location.search);
     const numarCitat = params.get("numarCitat") || "";
     const citatRO = params.get("citatRO") || "";
     const autorRO = params.get("autorRO") || "";
 
-    // Insertar contenido con HTML real
     document.getElementById("correo").innerHTML = `
       Bună,<br><br>
 
@@ -112,7 +99,6 @@
       Îți mulțumim pentru disponibilitatea și implicarea ta în echipa TP Translator.
     `;
 
-    // Copiar HTML con formato
     function copiarCorreo() {
       const range = document.createRange();
       range.selectNode(document.getElementById("correo"));
@@ -120,7 +106,7 @@
       window.getSelection().addRange(range);
       document.execCommand("copy");
       window.getSelection().removeAllRanges();
-      alert("Șablonul a fost copiat cu format");
+      alert("Șablonul a fost copiat");
     }
   </script>
 </body>
