@@ -48,6 +48,25 @@
         margin-top: 20px;
       }
 
+      .instructions-box {
+        background-color: #ebe5c1;
+        border: 1px solid #7f7537;
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 20px;
+      }
+
+      .instructions-box h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #7f7537;
+      }
+
+      .instructions-box ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
       .greeting {
         font-size: 18px;
         font-weight: bold;
@@ -117,6 +136,15 @@
     <div id="template">
       <div class="container">
 
+        <!-- INSTRUCCIONES -->
+        <div class="instructions-box">
+          <h3>Instrucțiuni</h3>
+          <ul>
+            <li>Lipește mailul traducătorului în <strong>CC</strong>. Nu în <strong>PARA</strong> sau <strong>TO</strong>.</li>
+            <li>Pune în <strong>PARA</strong> adresa <strong>echipa@tptranslator.tarapromisa.org</strong></li>
+          </ul>
+        </div>
+
         <div class="box-gold">
           <h1>Te informăm despre citatele</h1>
           <h2>care îți lipsesc.</h2>
@@ -172,6 +200,10 @@
       <button class="copy-btn" onclick="copiarMailTraductor()">
         Copiază mailul traducătorului
       </button>
+
+      <button class="copy-btn" onclick="copiarSubiect()">
+        Copiază subiectul
+      </button>
     </div>
 
     <!-- JS -->
@@ -191,6 +223,7 @@
       });
 
       const emailTraductor = params.get("emailTraductor") || "";
+      const subiect = "Reamintire: Citate nefinalizate";
 
       function copiarPlantilla() {
         const template = document.getElementById("template");
@@ -216,6 +249,11 @@
 
         navigator.clipboard.writeText(emailTraductor);
         alert("Email copiat: " + emailTraductor);
+      }
+
+      function copiarSubiect() {
+        navigator.clipboard.writeText(subiect);
+        alert("Subiect copiat: " + subiect);
       }
     </script>
 
