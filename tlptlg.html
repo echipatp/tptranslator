@@ -20,6 +20,22 @@
         padding: 20px;
       }
 
+      /* INSTRUCCIONES */
+      .instructions {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 16px;
+        border-radius: 10px;
+        background-color: #f2f2f2;
+        border-left: 6px solid #7f7537;
+      }
+
+      .instructions h3 {
+        margin-top: 0;
+        color: #7f7537;
+      }
+
+      /* PLANTILLA */
       .box-gold {
         background-color: #7f7537;
         border-radius: 12px;
@@ -34,6 +50,18 @@
         color: #ebe5c1;
       }
 
+      .informam-special {
+        font-family: "Times New Roman", Times, serif;
+        font-style: italic;
+      }
+
+      .citatele-highlight {
+        background-color: #ebe5c1;
+        color: #7f7537;
+        padding: 0 4px;
+        /* sin border-radius para que sea cuadrado */
+      }
+
       .box-gold h2 {
         margin: 0;
         font-size: 22px;
@@ -46,25 +74,6 @@
         border-radius: 12px;
         padding: 20px;
         margin-top: 20px;
-      }
-
-      .instructions-box {
-        background-color: #ebe5c1;
-        border: 1px solid #7f7537;
-        border-radius: 12px;
-        padding: 16px;
-        margin-bottom: 20px;
-      }
-
-      .instructions-box h3 {
-        margin-top: 0;
-        margin-bottom: 10px;
-        color: #7f7537;
-      }
-
-      .instructions-box ul {
-        margin: 0;
-        padding-left: 20px;
       }
 
       .greeting {
@@ -132,21 +141,24 @@
 
   <body>
 
-    <!-- PLANTILLA -->
+    <!-- INSTRUCCIONES (NO SE COPIAN) -->
+    <div class="instructions">
+      <h3>Instrucțiuni</h3>
+      <ul>
+        <li>Lipește mailul traducătorului în <strong>CC</strong>. Nu în PARA sau TO.</li>
+        <li>Pune în <strong>PARA</strong> adresa <strong>echipa@tptranslator.tarapromisa.org</strong></li>
+      </ul>
+    </div>
+
+    <!-- PLANTILLA QUE SE COPIA -->
     <div id="template">
       <div class="container">
 
-        <!-- INSTRUCCIONES -->
-        <div class="instructions-box">
-          <h3>Instrucțiuni</h3>
-          <ul>
-            <li>Lipește mailul traducătorului în <strong>CC</strong>. Nu în <strong>PARA</strong> sau <strong>TO</strong>.</li>
-            <li>Pune în <strong>PARA</strong> adresa <strong>echipa@tptranslator.tarapromisa.org</strong></li>
-          </ul>
-        </div>
-
         <div class="box-gold">
-          <h1>Te informăm despre citatele</h1>
+          <h1>
+            Te <span class="informam-special">informăm</span> despre 
+            <span class="citatele-highlight">citatele</span>
+          </h1>
           <h2>care îți lipsesc.</h2>
         </div>
 
@@ -210,6 +222,7 @@
     <script>
       const params = new URLSearchParams(window.location.search);
 
+      // Sustituir variables
       document.querySelectorAll("[data-var]").forEach(el => {
         const key = el.getAttribute("data-var");
         const value = params.get(key);
@@ -246,14 +259,13 @@
           alert("Nu există email pentru copiere.");
           return;
         }
-
         navigator.clipboard.writeText(emailTraductor);
-        alert("Email copiat: " + emailTraductor);
+        alert("Email copiat.");
       }
 
       function copiarSubiect() {
         navigator.clipboard.writeText(subiect);
-        alert("Subiect copiat: " + subiect);
+        alert("Subiect copiat.");
       }
     </script>
 
