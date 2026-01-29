@@ -113,7 +113,7 @@
 
   <body>
 
-    <!-- PLANTILLA RELLENADA -->
+    <!-- PLANTILLA -->
     <div id="template">
       <div class="container">
 
@@ -193,9 +193,19 @@
       const emailTraductor = params.get("emailTraductor") || "";
 
       function copiarPlantilla() {
-        const html = document.getElementById("template").outerHTML;
-        navigator.clipboard.writeText(html);
-        alert("Șablonul a fost copiat.");
+        const template = document.getElementById("template");
+
+        const range = document.createRange();
+        range.selectNode(template);
+
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        document.execCommand("copy");
+        selection.removeAllRanges();
+
+        alert("Șablonul a fost copiat și este gata de lipit în email.");
       }
 
       function copiarMailTraductor() {
@@ -203,6 +213,7 @@
           alert("Nu există email pentru copiere.");
           return;
         }
+
         navigator.clipboard.writeText(emailTraductor);
         alert("Email copiat: " + emailTraductor);
       }
