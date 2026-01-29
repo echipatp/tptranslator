@@ -1,0 +1,139 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #2e2e2e;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .box-gold {
+        background-color: #7f7537;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: left;
+      }
+
+      .box-gold h1 {
+        margin: 0;
+        font-size: 28px; /* más grande */
+        font-weight: bold;
+        color: #ebe5c1;
+        letter-spacing: -0.5px;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+
+      .box-gold h2 {
+        margin: 0;
+        font-size: 22px; /* más grande */
+        font-weight: bold;
+        color: #b0a775;
+        letter-spacing: -0.5px;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+
+      .content-box {
+        background-color: #f9f9f9;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 20px;
+      }
+
+      .greeting {
+        font-size: 18px; /* un poco más grande */
+        font-weight: bold;
+        color: #7f7537;
+        margin-bottom: 16px;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+
+      .citate-header {
+        background-color: #7f7537;
+        color: #ffffff;
+        padding: 10px;
+        text-align: left; /* alineado a la izquierda */
+        font-weight: bold;
+        border-radius: 8px;
+        margin: 20px 0 10px 0;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+
+      .citate-table {
+        background-color: #ebe5c1;
+        border: 1px solid #7f7537;
+        border-radius: 8px;
+        padding: 12px;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        color: #2e2e2e;
+        text-align: center;
+      }
+
+      .footer-images {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .footer-images img {
+        max-width: 100%;
+        height: auto;
+        margin: 5px;
+      }
+
+      p {
+        line-height: 1.5;
+        margin: 12px 0;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+
+      sub {
+        font-size: 11px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Cuadro dorado -->
+      <div class="box-gold">
+        <h1>Te informăm despre citatele</h1>
+        <h2>care îți lipsesc.</h2>
+      </div>
+
+      <!-- Cuadro blanco -->
+      <div class="content-box">
+        <p class="greeting">Ne bucurăm să-ți scriem, <span><<[nombre]>></span>.</p>
+        <p>Îți mulțumim pentru contribuția ta la proiectul nostru de traduceri.<br>
+        Conform evidenței noastre, ai următoarele citate netraduse:</p>
+
+        <!-- Tabla de título -->
+        <div class="citate-header">Citatele care lipsesc de tradus: <<[dinZiua]>> - <<[panaZiua]>></div>
+
+        <!-- Tabla de citas -->
+        <div class="citate-table"><<[citate]>></div>
+
+        <p>Te rugăm să le traduci cât mai curând, în măsura în care timpul îți permite.<br>
+        Dacă ai întrebări, nu ezita să ne contactezi. Mulțumim pentru colaborare!</p>
+
+        <p><sub>Acesta este un mesaj automat. Vă rugăm să nu răspundeți.</sub></p>
+      </div>
+
+      <!-- Firma + gif -->
+      <div class="footer-images">
+        <img src="<<[firmaRemitente]>>" alt="Firma" />
+        <img src="https://res.cloudinary.com/dlgqpbpwu/image/upload/v1766995558/GIF_TP_Translator_ubvfys.gif" alt="GIF" />
+      </div>
+    </div>
+  </body>
+</html>
