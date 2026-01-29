@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <title>TP Translator – Șablon</title>
+
     <style>
       body {
         margin: 0;
@@ -83,7 +85,7 @@
       }
 
       .buttons {
-        margin-top: 30px;
+        margin: 30px 0;
         text-align: center;
       }
 
@@ -111,9 +113,10 @@
 
   <body>
 
-    <!-- PLANTILLA -->
+    <!-- PLANTILLA RELLENADA -->
     <div id="template">
       <div class="container">
+
         <div class="box-gold">
           <h1>Te informăm despre citatele</h1>
           <h2>care îți lipsesc.</h2>
@@ -121,7 +124,7 @@
 
         <div class="content-box">
           <p class="greeting">
-            Ne bucurăm să-ți scriem, <span><<[nombre]>></span>.
+            Ne bucurăm să-ți scriem, <span data-var="nombre"></span>.
           </p>
 
           <p>
@@ -131,15 +134,18 @@
 
           <div class="citate-header">
             Citatele care lipsesc de tradus:
-            <<[dinZiua]>> - <<[panaZiua]>>
+            <span data-var="dinZiua"></span> - <span data-var="panaZiua"></span>
           </div>
 
           <div class="citate-table">
-            <<[citate]>>
+            <span data-var="citate"></span>
           </div>
 
           <p>
-            Te rugăm să le traduci în măsura în care timpul îți permite având în vedere că termenul limită este de 3 luni. De asemenea, poți transmite traducerile atât prin adresa de mail echipa@tptranslator.tarapromisa.org cât și prin grupul de WhatsApp.<br>
+            Te rugăm să le traduci în măsura în care timpul îți permite având în vedere că termenul limită este de 3 luni.
+            De asemenea, poți transmite traducerile atât prin adresa de mail
+            <strong>echipa@tptranslator.tarapromisa.org</strong>
+            cât și prin grupul de WhatsApp.<br>
             Dacă ai întrebări, nu ezita să ne contactezi. Mulțumim pentru colaborare!
           </p>
 
@@ -147,9 +153,13 @@
         </div>
 
         <div class="footer-images">
-          <img src="<<[firmaRemitente]>>" alt="Firma" />
-          <img src="https://res.cloudinary.com/dlgqpbpwu/image/upload/v1766995558/GIF_TP_Translator_ubvfys.gif" alt="GIF" />
+          <img data-var="firmaRemitente" alt="Firma" />
+          <img
+            src="https://res.cloudinary.com/dlgqpbpwu/image/upload/v1766995558/GIF_TP_Translator_ubvfys.gif"
+            alt="GIF"
+          />
         </div>
+
       </div>
     </div>
 
@@ -167,6 +177,20 @@
     <!-- JS -->
     <script>
       const params = new URLSearchParams(window.location.search);
+
+      // Sustitución automática de variables
+      document.querySelectorAll("[data-var]").forEach(el => {
+        const key = el.getAttribute("data-var");
+        const value = params.get(key);
+        if (!value) return;
+
+        if (el.tagName === "IMG") {
+          el.src = value;
+        } else {
+          el.innerHTML = value;
+        }
+      });
+
       const emailTraductor = params.get("emailTraductor") || "";
 
       function copiarPlantilla() {
