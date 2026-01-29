@@ -178,7 +178,6 @@
     <script>
       const params = new URLSearchParams(window.location.search);
 
-      // Sustitución automática de variables
       document.querySelectorAll("[data-var]").forEach(el => {
         const key = el.getAttribute("data-var");
         const value = params.get(key);
@@ -194,7 +193,7 @@
       const emailTraductor = params.get("emailTraductor") || "";
 
       function copiarPlantilla() {
-        const html = document.getElementById("template").innerHTML;
+        const html = document.getElementById("template").outerHTML;
         navigator.clipboard.writeText(html);
         alert("Șablonul a fost copiat.");
       }
